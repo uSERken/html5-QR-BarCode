@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no,width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>html5 二维码条码扫描</title>
+    <link rel="stylesheet" type="text/css" href="lib/my.css">
+    <script src="lib/zepto.js"></script>
+    <script src="lib/qrcode.lib.min.js"></script>
+    <script src="lib/quagga.min.js"></script>
+    <script src="lib/scanCode.js"></script>
+    <script>
+        function barcode(el) {
+            SCAN.BARCODE(el, function (data) {
+                if (data) {
+                    $(".result-qrcode").append("条码扫描结果——  " + data + "<br>");
+                } else {
+                    alert("图片不清晰或错误");
+                }
+            });
+        }
+        function qr(el) {
+            SCAN.QR(el, function (data) {
+                if (data) {
+                    $(".result-qrcode").append("二维码扫描结果——  " + data + "<br>");
+                } else {
+                    alert("图片不清晰或错误");
+                }
+            });
+        }
+
+        function both(el) {
+            SCAN.BOTHSCAN(el, function (data) {
+                if (data) {
+                    $(".result-qrcode").append("扫描结果—— " + data + "<br>");
+                } else {
+                    alert("图片不清晰或错误");
+                }
+            });
+        }
+
+    </script>
+</head>
+
+<body>
+
+<div>
+    <div class="qr-btn" onclick="barcode(this)">条码
+        <input input-type="jsScan" type="file" name="jsScan" hidden/>
+    </div>
+</div>
+
+<div>
+    <div class="qr-btn" onclick="qr(this)">二维码
+        <input input-type="jsScan" type="file" name="jsScan" hidden/>
+    </div>
+</div>
+
+<div>
+    <div class="qr-btn" onclick="both(this)">二维码条码
+        <input input-type="jsScan" type="file" name="jsScan" hidden/>
+    </div>
+</div>
+
+<div class="result-qrcode">
+</div>
+
+</body>
+
+</html>
